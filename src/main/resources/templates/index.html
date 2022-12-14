@@ -28,16 +28,17 @@
             <div class="forecast__item">
                 <div class="forecast__time">Сейчас</div>
                 <div class="forecast__icon" th:classappend="${image}">
-
                 </div>
 
-                <div class="forecast__temperature"> --˚</div>
+                <div class="forecast__temperature">
+                    <span th:utext="${temp}"></span> ˚
+                </div>
             </div>
 
 
             <div class="forecast__item">
                 <div class="forecast__time"> -- </div>
-                <div class="forecast__icon icon__01d"></div>
+                <div class="forecast__icon" th:classappend="${image1}"></div>
                 <div class="forecast__temperature"> --˚</div>
             </div>
 

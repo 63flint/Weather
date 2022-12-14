@@ -22,23 +22,21 @@ public class MainController {
         dw.initialize();
         model.addAttribute("city", dw.getNameCity());
 
-    for(int i=0; i<6; i++){
-        model.addAttribute("temp", dw.getCurrTemp(i));
-        model.addAttribute("pressure", dw.getPressure(i));
-        model.addAttribute("speed", dw.getwindspeed(i));
-        model.addAttribute("humidity", dw.getHumidity(i));
-        model.addAttribute("feels_like", dw.getFeelsLike(i));
-    }
 
+
+        model.addAttribute("temp", dw.getCurrTemp(0));
+        model.addAttribute("pressure", dw.getPressure(0));
+        model.addAttribute("speed", dw.getwindspeed(0));
+        model.addAttribute("humidity", dw.getHumidity(0));
+        model.addAttribute("feels_like", dw.getFeelsLike(0));
+        model.addAttribute("image", dw.getImage(0));
+        model.addAttribute("image1", dw.getImage(1));
+        System.out.println("Image : " + dw.getImage(0));
+
+        // Смена дня/ночи
         model.addAttribute("fgg", dw.isDay());
-        String bb[]=new String[6];
-        bb = dw.Image();
-        model.addAttribute("image", bb[0]);
 
         return "index";
-
-
-
     }
 
 
