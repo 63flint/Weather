@@ -1,4 +1,4 @@
-package com.flint.Weather.ConnectWeather;
+package com.flint.Weather.connectWeatherAPI;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

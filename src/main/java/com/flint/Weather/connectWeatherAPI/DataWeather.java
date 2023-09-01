@@ -1,4 +1,4 @@
-package com.flint.Weather.ConnectWeather;
+package com.flint.Weather.connectWeatherAPI;
 
 public class DataWeather {
     String city = "Самара";

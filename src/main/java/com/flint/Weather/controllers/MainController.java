@@ -1,7 +1,6 @@
 package com.flint.Weather.controllers;
 
-import com.flint.Weather.ConnectWeather.Connect;
-import com.flint.Weather.ConnectWeather.DataWeather;
+import com.flint.Weather.connectWeatherAPI.Connect;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
