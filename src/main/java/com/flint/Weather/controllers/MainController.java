@@ -1,6 +1,7 @@
 package com.flint.Weather.controllers;
 
 import com.flint.Weather.connectWeatherAPI.Connect;
+import com.flint.Weather.service.ForecastService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
+    private Connect dw = new Connect();
+    private ForecastService forecastService = new ForecastService(dw.getWeatherData());
 
     @GetMapping("/index")
     public String home(Model model)
@@ -17,9 +20,9 @@ public class MainController {
 //        Double CurrTemp = 25.0;
         // Название города
         //DataWeather dw = new DataWeather();
-        Connect dw = new Connect();
+
         dw.initialize();
-        model.addAttribute("city", dw.getNameCity());
+        model.addAttribute("city", forecastService.getCity());
 
 
 

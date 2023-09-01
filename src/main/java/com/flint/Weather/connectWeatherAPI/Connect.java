@@ -1,5 +1,9 @@
 package com.flint.Weather.connectWeatherAPI;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.flint.Weather.weatherPojo.MainWeather;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,11 +35,16 @@ public class Connect {
     double sunrise;
     double sunset;
     final int CNT = 40;
-    final String appId = "827ab0f94bca74870eb83bc59999ed23";
+    private static final String APP_ID = "827ab0f94bca74870eb83bc59999ed23";
+    private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
+    private static final String CITY = "Samara";
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     final String [] ICON = {"icon__01d", "icon__02d","icon__03d","icon__04d","icon__09d","icon__10d","icon__01n","icon__50d"};
     String [] imageJson= new String[6];
 
-    String city = "Samara";
+
 
     // время на компе
     double now = System.currentTimeMillis();
@@ -44,7 +53,7 @@ public class Connect {
    public void initialize() {
        //api.openweathermap.org/data/2.5/weather?q=Samara&appid=827ab0f94bca74870eb83bc59999ed23&units=metric
        //api.openweathermap.org/data/2.5/forecast?q=Samara&appid=827ab0f94bca74870eb83bc59999ed23&units=metric
-        String output = getUrlContent("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + appId + "&units=metric");
+        String output = getUrlContent("http://api.openweathermap.org/data/2.5/forecast?q=" + CITY + "&appid=" + APP_ID + "&units=metric");
         System.out.println(output);
 
         // инициализация объектов т.к они не могут быть пустыми
@@ -113,8 +122,6 @@ public class Connect {
             {
                 System.out.println("err arr" + e);
             }
-
-
         }
     }
 
@@ -138,7 +145,7 @@ public class Connect {
     }
 
     public String getNameCity() {
-        return city;
+        return CITY;
     }
 
     public Double getCurrTemp(int index) {
@@ -173,6 +180,21 @@ public class Connect {
        return  weatherData[index].imageJson;
     }
 
+
+    public MainWeather getWeatherData() {
+        try {
+            String output = getUrlContent(buildUrl());
+            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            MainWeather mainWeather = objectMapper.readValue(output, MainWeather.class);
+            return mainWeather;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error parse JSON Object", e);
+        }
+    }
+
+    private String buildUrl(){
+       return BASE_URL + CITY + "&appid=" + APP_ID + "&units=metric";
+    }
 
 
     // Возвращает строку в формате JSON с данными о погоде.
