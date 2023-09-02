@@ -37,32 +37,38 @@
 
 
             <div class="forecast__item">
-                <div class="forecast__time"> -- </div>
+                <div class="forecast__time"> --</div>
                 <div class="forecast__icon" th:classappend="${image1}"></div>
                 <div class="forecast__temperature"> --˚</div>
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> -- </div>
+                <div class="forecast__time">
+                    <span th:utext="${time3}"></span>
+                </div>
+                <div class="forecast__icon" th:classappend="${image3}">
+                </div>
+
+                <div class="forecast__temperature">
+                    <span th:utext="${temp3}"></span> ˚
+                </div>
+            </div>
+
+            <div class="forecast__item">
+                <div class="forecast__time"> --</div>
                 <div class="forecast__icon icon__04d"></div>
                 <div class="forecast__temperature"> --˚</div>
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> -- </div>
-                <div class="forecast__icon icon__04d"></div>
-                <div class="forecast__temperature"> --˚</div>
-            </div>
-
-            <div class="forecast__item">
-                <div class="forecast__time"> -- </div>
+                <div class="forecast__time"> --</div>
                 <div class="forecast__icon icon__02d"></div>
                 <div class="forecast__temperature"> --˚</div>
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> -- </div>
-                <div class="forecast__icon icon__02d"></div>
+                <div class="forecast__time"> --</div>
+                <div class="forecast__icon icon__01d"></div>
                 <div class="forecast__temperature"> --˚</div>
             </div>
         </div>

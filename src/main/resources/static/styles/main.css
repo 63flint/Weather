@@ -129,9 +129,12 @@ html.transition * {
   background-repeat: no-repeat;
 }
 
-.icon__01d,
+.icon__01d {
+  background-image: url("../images/01n.svg");
+}
+
 .icon__01n {
-  background-image: url("../images/01d.png");
+  background-image: url("../images/01n.svg");
 }
 
 .icon__02d,

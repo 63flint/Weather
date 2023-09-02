@@ -26,7 +26,7 @@ class WeatherData {
 }
 
 
-public class Connect {
+public class WeatherApiService {
     double temp;
     double feels_like;
     double temp_max;
