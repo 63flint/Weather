@@ -5,8 +5,7 @@ import com.flint.Weather.weatherPojo.MainWeather;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -27,12 +26,12 @@ public class ForecastService {
         return mainWeather.getCity().getName();
     }
 
-
-
     public String getTime(String time) {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-//        return Integer.toString(localDateTime.getHour());
-        return String.format("%02d", localDateTime.getHour());
+        ZoneId zoneId = ZoneId.of("Europe/Samara");
+        ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(zoneId);
+        System.out.println(zdt);
+        return String.format("%02d", zdt.getHour());
     }
 
     public String getIcon(int index){

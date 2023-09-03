@@ -19,8 +19,6 @@ public class MainController {
         forecastService = new ForecastService(dw.getWeatherData());
         // main
         model.addAttribute("city", forecastService.getCity());
-        model.addAttribute("serverTime", System.currentTimeMillis());
-
 
         // 1
         Day day1 = forecastService.getDayWeather(0);
@@ -31,6 +29,7 @@ public class MainController {
         model.addAttribute("feels_like", day1.getMain().getFeels_like());
         model.addAttribute("image1", forecastService.getIcon(0));
         model.addAttribute("description", day1.getWeather().get(0).getDescription());
+        model.addAttribute("serverTime",  forecastService.getTime(day1.getDt_txt()));
 
         //2
         Day day2 = forecastService.getDayWeather(1);
@@ -70,11 +69,3 @@ public class MainController {
 
 
 }
-//    @RequestMapping("/variable-example1")
-//    public String variableExample1(Model model, HttpServletRequest request) {
-//        // variable1
-//        model.addAttribute("variable1", "Value of variable1!");
-//        // variable2
-//        request.setAttribute("variable2", "Value of variable2!");
-//        return "variable-example1";
-//    }

@@ -163,11 +163,11 @@ html.transition * {
 }
 
 .icon__09d {
-  background-image: url("../images/09d.png");
+  background-image: url("../images/09d.svg");
 }
 
 .icon__09n {
-  background-image: url("../images/09n.png");
+  background-image: url("../images/09n.svg");
 }
 
 .icon__10d {
@@ -195,10 +195,10 @@ html.transition * {
 }
 
 .icon__50d {
-  background-image: url("../images/50d.png");
+  background-image: url("../images/50d.svg");
 }
 
 .icon__50n {
-  background-image: url("../images/50n.png");
+  background-image: url("../images/50n.svg");
 }
 /*# sourceMappingURL=main.css.map */
