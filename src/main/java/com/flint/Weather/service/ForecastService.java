@@ -31,11 +31,17 @@ public class ForecastService {
 
     public String getTime(String time) {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return Integer.toString(localDateTime.getHour());
+//        return Integer.toString(localDateTime.getHour());
+        return String.format("%02d", localDateTime.getHour());
     }
 
     public String getIcon(int index){
         return "icon__" + mainWeather.getList().get(index).getWeather().get(0).getIcon();
+    }
+
+    public String isDay(){
+        long time = mainWeather.getList().get(0).getDt();
+        return time > mainWeather.getCity().getSunrise() && time < mainWeather.getCity().getSunset() ? "day" : "night";
     }
 
 

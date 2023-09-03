@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
     private WeatherApiService dw = new WeatherApiService();
-    private ForecastService forecastService = new ForecastService(dw.getWeatherData());
+    private ForecastService forecastService;
 
     @GetMapping("/index")
     public String home(Model model)
     {
-
-        dw.initialize();
+        forecastService = new ForecastService(dw.getWeatherData());
+        // main
         model.addAttribute("city", forecastService.getCity());
+        model.addAttribute("serverTime", System.currentTimeMillis());
+
 
         // 1
         Day day1 = forecastService.getDayWeather(0);
@@ -28,6 +30,7 @@ public class MainController {
         model.addAttribute("humidity", day1.getMain().getHumidity());
         model.addAttribute("feels_like", day1.getMain().getFeels_like());
         model.addAttribute("image1", forecastService.getIcon(0));
+        model.addAttribute("description", day1.getWeather().get(0).getDescription());
 
         //2
         Day day2 = forecastService.getDayWeather(1);
@@ -59,7 +62,7 @@ public class MainController {
         model.addAttribute("image6", forecastService.getIcon(5));
 
         // Смена дня/ночи
-        model.addAttribute("fgg", dw.isDay());
+        model.addAttribute("fgg", forecastService.isDay());
 
         return "index";
     }

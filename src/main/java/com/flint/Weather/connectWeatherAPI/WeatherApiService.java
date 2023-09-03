@@ -184,6 +184,7 @@ public class WeatherApiService {
     public MainWeather getWeatherData() {
         try {
             String output = getUrlContent(buildUrl());
+            System.out.println(output);
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             MainWeather mainWeather = objectMapper.readValue(output, MainWeather.class);
             return mainWeather;
