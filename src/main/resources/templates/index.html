@@ -20,26 +20,32 @@
                 --
             </div>
             <div class="current__temperature">
-                <span th:utext="${temp}"></span> ˚
+                <span th:utext="${temp1}"></span> ˚
             </div>
         </div>
 
         <div class="forecast">
             <div class="forecast__item">
                 <div class="forecast__time">Сейчас</div>
-                <div class="forecast__icon" th:classappend="${image}">
+                <div class="forecast__icon" th:classappend="${image1}">
                 </div>
 
                 <div class="forecast__temperature">
-                    <span th:utext="${temp}"></span> ˚
+                    <span th:utext="${temp1}"></span> ˚
                 </div>
             </div>
 
 
             <div class="forecast__item">
-                <div class="forecast__time"> --</div>
-                <div class="forecast__icon" th:classappend="${image1}"></div>
-                <div class="forecast__temperature"> --˚</div>
+                <div class="forecast__time">
+                    <span th:utext="${time2}"></span>
+                </div>
+                <div class="forecast__icon" th:classappend="${image2}">
+                </div>
+
+                <div class="forecast__temperature">
+                    <span th:utext="${temp2}"></span> ˚
+                </div>
             </div>
 
             <div class="forecast__item">
@@ -55,22 +61,41 @@
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> --</div>
-                <div class="forecast__icon icon__04d"></div>
-                <div class="forecast__temperature"> --˚</div>
+                <div class="forecast__time">
+                    <span th:utext="${time4}"></span>
+                </div>
+                <div class="forecast__icon" th:classappend="${image4}">
+                </div>
+
+                <div class="forecast__temperature">
+                    <span th:utext="${temp4}"></span> ˚
+                </div>
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> --</div>
-                <div class="forecast__icon icon__02d"></div>
-                <div class="forecast__temperature"> --˚</div>
+                <div class="forecast__time">
+                    <span th:utext="${time5}"></span>
+                </div>
+                <div class="forecast__icon" th:classappend="${image5}">
+                </div>
+
+                <div class="forecast__temperature">
+                    <span th:utext="${temp5}"></span> ˚
+                </div>
             </div>
 
             <div class="forecast__item">
-                <div class="forecast__time"> --</div>
-                <div class="forecast__icon icon__01d"></div>
-                <div class="forecast__temperature"> --˚</div>
+                <div class="forecast__time">
+                    <span th:utext="${time6}"></span>
+                </div>
+                <div class="forecast__icon" th:classappend="${image6}">
+                </div>
+
+                <div class="forecast__temperature">
+                    <span th:utext="${temp6}"></span> ˚
+                </div>
             </div>
+
         </div>
 
         <div class="details">

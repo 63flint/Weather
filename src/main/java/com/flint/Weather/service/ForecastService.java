@@ -34,5 +34,9 @@ public class ForecastService {
         return Integer.toString(localDateTime.getHour());
     }
 
+    public String getIcon(int index){
+        return "icon__" + mainWeather.getList().get(index).getWeather().get(0).getIcon();
+    }
+
 
 }
