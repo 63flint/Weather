@@ -16,7 +16,7 @@ public class MainController {
     @GetMapping("/index")
     public String home(Model model)
     {
-        forecastService = new ForecastService(dw.getWeatherData());
+        forecastService = new ForecastService(dw.getForecastData());
         // main
         model.addAttribute("city", forecastService.getCity());
 
