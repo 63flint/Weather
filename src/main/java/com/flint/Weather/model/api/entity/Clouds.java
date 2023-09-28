@@ -1,4 +1,4 @@
-package com.flint.Weather.weatherPojo;
+package com.flint.Weather.model.api.entity;
 
 public class Clouds {
     private String all = "";

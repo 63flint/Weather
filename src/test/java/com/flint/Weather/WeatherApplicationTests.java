@@ -1,7 +1,7 @@
 package com.flint.Weather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flint.Weather.weatherPojo.MainWeather;
+import com.flint.Weather.model.ForecastResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -1516,7 +1516,7 @@ class WeatherApplicationTests {
 				"    \"sunset\": 1671020591\n" +
 				"  }\n" +
 				"}";
-		MainWeather weather = objectMapper.readValue(str, MainWeather.class);
+		ForecastResponse weather = objectMapper.readValue(str, ForecastResponse.class);
 		System.out.println(objectMapper.writeValueAsString(weather));
 
 	}

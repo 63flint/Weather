@@ -1,8 +1,11 @@
-package com.flint.Weather.weatherPojo;
+package com.flint.Weather.model;
+
+import com.flint.Weather.model.api.entity.City;
+import com.flint.Weather.model.api.entity.Day;
 
 import java.util.ArrayList;
 
-public class MainWeather {
+public class ForecastResponse {
     private String cod = "";
     private int message;
     private String cnt = "";

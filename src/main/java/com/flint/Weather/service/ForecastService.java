@@ -1,29 +1,26 @@
 package com.flint.Weather.service;
 
-import com.flint.Weather.weatherPojo.Day;
-import com.flint.Weather.weatherPojo.MainWeather;
+import com.flint.Weather.model.api.entity.Day;
+import com.flint.Weather.model.ForecastResponse;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class ForecastService {
-    private MainWeather mainWeather;
+    private ForecastResponse forecastResponse;
 
-    public ForecastService(MainWeather mainWeather){
-        this.mainWeather = mainWeather;
+    public ForecastService(ForecastResponse forecastResponse){
+        this.forecastResponse = forecastResponse;
     }
 
     public Day getDayWeather(int index){
         double now = System.currentTimeMillis();
 
-        return mainWeather.getList().get(index);
+        return forecastResponse.getList().get(index);
     }
 
     public String getCity(){
-        return mainWeather.getCity().getName();
+        return forecastResponse.getCity().getName();
     }
 
     public String getTime(String time) {
@@ -35,12 +32,12 @@ public class ForecastService {
     }
 
     public String getIcon(int index){
-        return "icon__" + mainWeather.getList().get(index).getWeather().get(0).getIcon();
+        return "icon__" + forecastResponse.getList().get(index).getWeather().get(0).getIcon();
     }
 
     public String isDay(){
-        long time = mainWeather.getList().get(0).getDt();
-        return time > mainWeather.getCity().getSunrise() && time < mainWeather.getCity().getSunset() ? "day" : "night";
+        long time = forecastResponse.getList().get(0).getDt();
+        return time > forecastResponse.getCity().getSunrise() && time < forecastResponse.getCity().getSunset() ? "day" : "night";
     }
 
 

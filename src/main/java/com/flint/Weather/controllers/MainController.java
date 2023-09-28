@@ -2,7 +2,8 @@ package com.flint.Weather.controllers;
 
 import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.service.ForecastService;
-import com.flint.Weather.weatherPojo.Day;
+import com.flint.Weather.model.api.entity.Day;
+import com.flint.Weather.service.WeatherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,19 +11,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
-    private WeatherApiService dw = new WeatherApiService();
+    private WeatherApiService weatherApiService = new WeatherApiService();
     private ForecastService forecastService;
+    private WeatherService weatherService;
 
     @GetMapping("/index")
     public String home(Model model)
     {
-        forecastService = new ForecastService(dw.getForecastData());
+        forecastService = new ForecastService(weatherApiService.getForecastData());
+        weatherService = new WeatherService(weatherApiService.getWeatherData());
+
         // main
         model.addAttribute("city", forecastService.getCity());
 
         // 1
         Day day1 = forecastService.getDayWeather(0);
-        model.addAttribute("temp1", day1.getMain().getTemp());
+//        model.addAttribute("temp1", day1.getMain().getTemp());
+        model.addAttribute("temp1", weatherService.getCurrentTemp());
         model.addAttribute("pressure", day1.getMain().getPressure());
         model.addAttribute("speed", day1.getWind().getSpeed());
         model.addAttribute("humidity", day1.getMain().getHumidity());

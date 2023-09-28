@@ -3,7 +3,8 @@ package com.flint.Weather.connectWeatherAPI;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.flint.Weather.weatherPojo.MainWeather;
+import com.flint.Weather.model.ForecastResponse;
+import com.flint.Weather.model.WeatherResponse;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,20 +21,27 @@ public class WeatherApiService {
 
 
 
-    public MainWeather getForecastData() {
+    public ForecastResponse getForecastData() {
         try {
             String output = getUrlContent(buildForecastUrl());
             System.out.println(output);
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            MainWeather mainWeather = objectMapper.readValue(output, MainWeather.class);
-            return mainWeather;
+            ForecastResponse forecastResponse = objectMapper.readValue(output, ForecastResponse.class);
+            return forecastResponse;
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error parse JSON Object", e);
         }
     }
 
-    public void getWeatherData(){
-        
+    public WeatherResponse getWeatherData(){
+        String output = getUrlContent(buildWeatherUrl());
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            WeatherResponse weatherResponse = objectMapper.readValue(output, WeatherResponse.class);
+            return weatherResponse;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String buildForecastUrl(){
