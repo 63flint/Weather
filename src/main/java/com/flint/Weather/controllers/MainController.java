@@ -25,45 +25,45 @@ public class MainController {
         model.addAttribute("city", forecastService.getCity());
 
         // 1
-        Day day1 = forecastService.getDayWeather(0);
-//        model.addAttribute("temp1", day1.getMain().getTemp());
+        Day today = forecastService.getDayWeather(0);
+//        model.addAttribute("temp1", today.getMain().getTemp());
         model.addAttribute("temp1", weatherService.getCurrentTemp());
-        model.addAttribute("pressure", day1.getMain().getPressure());
-        model.addAttribute("speed", day1.getWind().getSpeed());
-        model.addAttribute("humidity", day1.getMain().getHumidity());
-        model.addAttribute("feels_like", day1.getMain().getFeels_like());
+        model.addAttribute("pressure", today.getMain().getPressure());
+        model.addAttribute("speed", today.getWind().getSpeed());
+        model.addAttribute("humidity", today.getMain().getHumidity());
+        model.addAttribute("feels_like", today.getMain().getFeels_like());
         model.addAttribute("image1", forecastService.getIcon(0));
-        model.addAttribute("description", day1.getWeather().get(0).getDescription());
-        model.addAttribute("serverTime",  forecastService.getTime(day1.getDt_txt()));
+        model.addAttribute("description", today.getWeather().get(0).getDescription());
+        model.addAttribute("serverTime",  forecastService.getTime(today.getDt_txt()));
 
         //2
-        Day day2 = forecastService.getDayWeather(1);
-        model.addAttribute("temp2", day2.getMain().getTemp());
-        model.addAttribute("time2", forecastService.getTime(day2.getDt_txt()));
-        model.addAttribute("image2", forecastService.getIcon(1));
+        Day offset_0h = forecastService.getDayWeather(0);
+        model.addAttribute("temp2", offset_0h.getMain().getTemp());
+        model.addAttribute("time2", forecastService.getTime(offset_0h.getDt_txt()));
+        model.addAttribute("image2", forecastService.getIcon(0));
 
         // 3
-        Day day3 = forecastService.getDayWeather(2);
-        model.addAttribute("temp3", day3.getMain().getTemp());
-        model.addAttribute("time3", forecastService.getTime(day3.getDt_txt()));
-        model.addAttribute("image3", forecastService.getIcon(2));
+        Day offset_3h = forecastService.getDayWeather(1);
+        model.addAttribute("temp3", offset_3h.getMain().getTemp());
+        model.addAttribute("time3", forecastService.getTime(offset_3h.getDt_txt()));
+        model.addAttribute("image3", forecastService.getIcon(1));
 
         // 4
-        Day day4 = forecastService.getDayWeather(3);
-        model.addAttribute("temp4", day4.getMain().getTemp());
-        model.addAttribute("time4", forecastService.getTime(day4.getDt_txt()));
-        model.addAttribute("image4", forecastService.getIcon(3));
+        Day offset_6h = forecastService.getDayWeather(2);
+        model.addAttribute("temp4", offset_6h.getMain().getTemp());
+        model.addAttribute("time4", forecastService.getTime(offset_6h.getDt_txt()));
+        model.addAttribute("image4", forecastService.getIcon(2));
 
         // 5
-        Day day5 = forecastService.getDayWeather(4);
-        model.addAttribute("temp5", day5.getMain().getTemp());
-        model.addAttribute("time5", forecastService.getTime(day5.getDt_txt()));
-        model.addAttribute("image5", forecastService.getIcon(4));
+        Day offset_9h = forecastService.getDayWeather(3);
+        model.addAttribute("temp5", offset_9h.getMain().getTemp());
+        model.addAttribute("time5", forecastService.getTime(offset_9h.getDt_txt()));
+        model.addAttribute("image5", forecastService.getIcon(3));
         // 6
-        Day day6 = forecastService.getDayWeather(5);
-        model.addAttribute("temp6", day6.getMain().getTemp());
-        model.addAttribute("time6", forecastService.getTime(day6.getDt_txt()));
-        model.addAttribute("image6", forecastService.getIcon(5));
+        Day offset_12h = forecastService.getDayWeather(4);
+        model.addAttribute("temp6", offset_12h.getMain().getTemp());
+        model.addAttribute("time6", forecastService.getTime(offset_12h.getDt_txt()));
+        model.addAttribute("image6", forecastService.getIcon(4));
 
         // Смена дня/ночи
         model.addAttribute("fgg", forecastService.isDay());
