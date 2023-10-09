@@ -1,24 +1,27 @@
 package com.flint.Weather.connectWeatherAPI;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.flint.Weather.model.ForecastResponse;
+import com.flint.Weather.model.LocationResponse;
 import com.flint.Weather.model.WeatherResponse;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 
 public class WeatherApiService {
     private static final String APP_ID = "827ab0f94bca74870eb83bc59999ed23";
     private static final String FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
     private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
+    private static final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=";
     private static final String CITY = "Samara";
     private ObjectMapper objectMapper = new ObjectMapper();
-
 
 
     public ForecastResponse getForecastData() {
@@ -44,12 +47,27 @@ public class WeatherApiService {
         }
     }
 
+    public List<LocationResponse> getLocation(String city){
+        String output = getUrlContent(buildLocationUrl(city));
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            List<LocationResponse> weatherResponse = objectMapper.readValue(output, new TypeReference<List<LocationResponse>>() {});
+            return weatherResponse;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String buildForecastUrl(){
        return FORECAST_URL + CITY + "&appid=" + APP_ID + "&units=metric";
     }
 
     private String buildWeatherUrl(){
         return WEATHER_URL + CITY + "&appid=" + APP_ID + "&units=metric";
+    }
+
+    private String buildLocationUrl(String city){
+        return GEOCODING_URL + city + "&limit=5&appid=" + APP_ID;
     }
 
 
