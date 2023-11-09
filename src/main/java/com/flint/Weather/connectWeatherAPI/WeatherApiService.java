@@ -36,7 +36,7 @@ public class WeatherApiService {
         }
     }
 
-    public WeatherResponse getWeatherData(){
+    public WeatherResponse getWeatherData() {
         String output = getUrlContent(buildWeatherUrl());
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
@@ -47,52 +47,51 @@ public class WeatherApiService {
         }
     }
 
-    public List<LocationResponse> getLocation(String city){
+    public List<LocationResponse> getLocation(String city) {
         String output = getUrlContent(buildLocationUrl(city));
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            List<LocationResponse> weatherResponse = objectMapper.readValue(output, new TypeReference<List<LocationResponse>>() {});
+            List<LocationResponse> weatherResponse = objectMapper.readValue(output, new TypeReference<List<LocationResponse>>() {
+            });
             return weatherResponse;
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private String buildForecastUrl(){
-       return FORECAST_URL + CITY + "&appid=" + APP_ID + "&units=metric";
+    private String buildForecastUrl() {
+        return FORECAST_URL + CITY + "&appid=" + APP_ID + "&units=metric";
     }
 
-    private String buildWeatherUrl(){
+    private String buildWeatherUrl() {
         return WEATHER_URL + CITY + "&appid=" + APP_ID + "&units=metric";
     }
 
-    private String buildLocationUrl(String city){
+    private String buildLocationUrl(String city) {
         return GEOCODING_URL + city + "&limit=5&appid=" + APP_ID;
     }
 
 
     // Возвращает строку в формате JSON с данными о погоде.
-    private static String getUrlContent(String urlAdress){
+    private static String getUrlContent(String urlAdress) {
         StringBuffer content = new StringBuffer();
-        try{
-            URL url =new URL(urlAdress);
+        try {
+            URL url = new URL(urlAdress);
             // Подключение по ссылке
             URLConnection urlCon = url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlCon.getInputStream()));
             String line;
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 content.append(line + "\n");
             }
             bufferedReader.close();
 
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Город не найден");
         }
         return content.toString();
     }
-
-
 
 }
