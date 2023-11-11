@@ -1,6 +1,7 @@
 package com.flint.Weather.controllers;
 
 import com.flint.Weather.connectWeatherAPI.WeatherApiService;
+import com.flint.Weather.model.LocationResponse;
 import com.flint.Weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,15 @@ public class SearchController {
     @GetMapping
     public String search(@ModelAttribute("startString") String startString, Model model){
 
-        System.out.printf(startString);
+        boolean button = true;
+        LocationResponse locationResponse = weatherApiService.getLocation(startString).get(0);
+
+        System.out.println(locationResponse.getName());
+        System.out.println(locationResponse.getCountry());
+        System.out.println(locationResponse.getLatitude());
+        System.out.println(locationResponse.getLongitude());
         model.addAttribute("locations", weatherApiService.getLocation(startString));
+        model.addAttribute("isSaved", button);
         return "search";
     }
 }
