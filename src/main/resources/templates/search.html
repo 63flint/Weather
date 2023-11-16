@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div th:each="location : ${locations}"  class="card" style="width: 18rem;">
-                <form th:method="POST" th:action="@{/location/save}" th:object="${newLocation}">
+                <form th:method="POST" th:action="@{/search/save}" th:object="${newLocation}">
                     <input type="hidden" name="name"  th:value="${location.getName()}" />
                     <input type="hidden" name="countryCode"  th:value="${location.getCountry()}" />
                     <input type="hidden" name="latitude"  th:value="${location.getLatitude()}" />

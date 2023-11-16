@@ -20,11 +20,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name")
+    @Column(nullable=false)
     private String name;
-    @Column(name = "password")
+    @Column(nullable=false)
     private String password;
-    @Column(name = "email")
+    @Column(nullable=false, unique=true)
     private String email;
     @OneToMany(mappedBy = "user")
     private List<Location> locations;
