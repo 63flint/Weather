@@ -2,11 +2,9 @@ package com.flint.Weather.service;
 
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.model.LocationResponse;
-import com.flint.Weather.model.users.User;
+import com.flint.Weather.entity.User;
 import com.flint.Weather.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

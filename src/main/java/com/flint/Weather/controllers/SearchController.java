@@ -2,7 +2,7 @@ package com.flint.Weather.controllers;
 
 import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.entity.Location;
-import com.flint.Weather.model.users.User;
+import com.flint.Weather.entity.User;
 import com.flint.Weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

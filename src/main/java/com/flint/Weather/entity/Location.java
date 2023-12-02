@@ -1,7 +1,6 @@
 package com.flint.Weather.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.flint.Weather.model.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +28,6 @@ public class Location {
     @Column(name = "longitude")
     @JsonProperty("lon")
     private Double longitude;
-    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private User user;
 }

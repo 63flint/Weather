@@ -1,4 +1,4 @@
-package com.flint.Weather.model.users;
+package com.flint.Weather.entity;
 
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.model.LocationResponse;
