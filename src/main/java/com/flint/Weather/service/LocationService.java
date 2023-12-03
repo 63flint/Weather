@@ -5,11 +5,13 @@ import com.flint.Weather.model.LocationResponse;
 import com.flint.Weather.entity.User;
 import com.flint.Weather.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LocationService {
@@ -39,6 +41,7 @@ public class LocationService {
     public void saveLocation(Location location, User user){
         location.setUser(user);
         locationRepository.save(location);
+        log.info("Save location: " + location.getName());
     }
 
 }

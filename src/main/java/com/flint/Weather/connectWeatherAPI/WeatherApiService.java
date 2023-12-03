@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.flint.Weather.model.ForecastResponse;
 import com.flint.Weather.model.LocationResponse;
 import com.flint.Weather.model.WeatherResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-
+@Slf4j
 public class WeatherApiService {
     private static final String APP_ID = "827ab0f94bca74870eb83bc59999ed23";
     private static final String FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
@@ -49,6 +50,7 @@ public class WeatherApiService {
 
     public List<LocationResponse> getLocation(String city) {
         String output = getUrlContent(buildLocationUrl(city));
+        log.info("get city: " + city + " response: " + output);
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
             List<LocationResponse> weatherResponse = objectMapper.readValue(output, new TypeReference<List<LocationResponse>>() {
