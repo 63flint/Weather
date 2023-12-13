@@ -2,9 +2,12 @@ package com.flint.Weather.controllers;
 
 import com.flint.Weather.dto.UserRegistration;
 import com.flint.Weather.service.RegisterService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,14 +22,15 @@ public class RegisterController {
     private final RegisterService registerService;
 
     @GetMapping("/")
-    public String showHomePage(Model model) {
-//        model.addAttribute("user", userDetails);
+    public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        model.addAttribute("user", userDetails);
         log.info("redirect on index page");
         return "locations";
     }
 
     @GetMapping("/login")
     public String showLoginPage() {
+        log.info("login");
         return "login";
     }
 
@@ -39,7 +43,7 @@ public class RegisterController {
     // Регистрация нового пользователя
     @PostMapping("/register/save")
     public String registration(@ModelAttribute("user") UserRegistration userRegisterRequestDTO, BindingResult validateResult, Model model,
-                               HttpServletRequest request){
+                               HttpServletRequest request) throws ServletException {
 
         if(validateResult.hasErrors()){
             model.addAttribute("user", userRegisterRequestDTO);
@@ -49,6 +53,9 @@ public class RegisterController {
 
         log.info(userRegisterRequestDTO.getLastName());
         registerService.saveUser(userRegisterRequestDTO);
+
+
+        request.login(userRegisterRequestDTO.getEmail(), userRegisterRequestDTO.getPassword());
         return "redirect:/locations";
     }
 

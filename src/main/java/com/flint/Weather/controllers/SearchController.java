@@ -21,7 +21,7 @@ public class SearchController {
     private WeatherApiService weatherApiService = new WeatherApiService();
 
     @GetMapping
-    public String search(@ModelAttribute("startString") String startString, Model model){
+    public String search(@ModelAttribute("startString") String startString, Model model, @AuthenticationPrincipal UserDetails userDetails){
 //        User user = ((CustomUser) userDetails).getUser();
 
         model.addAttribute("locations", weatherApiService.getLocation(startString));
