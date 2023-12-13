@@ -1,13 +1,11 @@
 package com.flint.Weather.entity;
 
-import com.flint.Weather.entity.Location;
-import com.flint.Weather.model.LocationResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
