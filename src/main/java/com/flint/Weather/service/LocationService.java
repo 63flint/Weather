@@ -38,10 +38,24 @@ public class LocationService {
         return location.isPresent();
     }
 
-    public void saveLocation(Location location, User user){
+    public void savedLocation(List<LocationResponse> locationResponses, Long userId){
+        for (LocationResponse location: locationResponses) {
+            Optional<Location> locationDB = getLocationFromDb(location, userId);
+            // Проверка, что такая локация уже записана в БД
+            if(locationDB.isPresent()){
+                location.setId(locationDB.get().getId());
+            }
+        }
+    }
+
+    public void saveUserInLocation(Location location, User user){
         location.setUser(user);
         locationRepository.save(location);
         log.info("Save location: " + location.getName());
+    }
+
+    private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Long userId){
+        return locationRepository.findByNameAndCountryAndUserId(locationResponse.getName(), locationResponse.getCountry(), userId);
     }
 
 }

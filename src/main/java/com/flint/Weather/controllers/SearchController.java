@@ -4,6 +4,7 @@ import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.entity.CustomUser;
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.entity.User;
+import com.flint.Weather.model.LocationResponse;
 import com.flint.Weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/search")
@@ -22,9 +25,10 @@ public class SearchController {
 
     @GetMapping
     public String search(@ModelAttribute("startString") String startString, Model model, @AuthenticationPrincipal UserDetails userDetails){
-//        User user = ((CustomUser) userDetails).getUser();
-
-        model.addAttribute("locations", weatherApiService.getLocation(startString));
+        User user = ((CustomUser) userDetails).getUser();
+        List<LocationResponse> locationResponses = weatherApiService.getLocation(startString);
+        locationService.savedLocation(locationResponses, user.getId());
+        model.addAttribute("locations", locationResponses);
         model.addAttribute("newLocation", new Location());
         model.addAttribute("isSaved", locationService.checkLocationInDB(weatherApiService.getLocation(startString)));
         return "search";
