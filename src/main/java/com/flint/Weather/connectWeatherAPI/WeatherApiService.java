@@ -25,6 +25,7 @@ public class WeatherApiService {
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
+    // Получить прогноз погоды на 3 дня каждые 3 часа
     public ForecastResponse getForecastData() {
         try {
             String output = getUrlContent(buildForecastUrl());
@@ -37,6 +38,7 @@ public class WeatherApiService {
         }
     }
 
+    // текущая погода
     public WeatherResponse getWeatherData() {
         String output = getUrlContent(buildWeatherUrl());
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

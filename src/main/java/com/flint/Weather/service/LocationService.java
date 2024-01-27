@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +54,22 @@ public class LocationService {
         location.setUser(user);
         locationRepository.save(location);
         log.info("Save location: " + location.getName());
+    }
+
+    public void deleteLocation(Integer id){
+        locationRepository.deleteById(id);
+    }
+
+    public Location getLocationById(Integer id){
+        Optional<Location> location = locationRepository.findById(id);
+        if(location.isEmpty()) {
+            log.error("Location not exist");
+        }
+        return location.get();
+    }
+
+    public List<Location> getAllUserLocations(User user){
+        return locationRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
     private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Long userId){

@@ -10,7 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -21,9 +24,9 @@ public class LocationController {
     private final UserRepository userRepository;
 
 
-    @GetMapping("{id}/delete")
-    public String deleteLocation(@PathVariable("id") Integer locationId){
-
+    @GetMapping("/{id}/delete")
+    public String deleteLocation(@PathVariable("id") Integer locationId, @ModelAttribute("startString") String startString){
+        locationService.deleteLocation(locationId);
         return "redirect:/";
     }
 
@@ -35,5 +38,13 @@ public class LocationController {
         locationService.saveUserInLocation(location, user);
 
         return "redirect:/search?startString=" + startString;
+    }
+
+    @GetMapping("/saved")
+    public String viewSavedLocations(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        User user = ((CustomUser) userDetails).getUser();
+        List<Location> locations = locationService.getAllUserLocations(user);
+        model.addAttribute("locations", locations);
+        return "locations";
     }
 }
