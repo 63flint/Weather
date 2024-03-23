@@ -1,6 +1,7 @@
 package com.flint.Weather.service;
 
 import com.flint.Weather.model.WeatherResponse;
+import org.springframework.stereotype.Service;
 
 public class WeatherService {
 

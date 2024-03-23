@@ -21,14 +21,13 @@ public class WeatherApiService {
     private static final String FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
     private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
     private static final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=";
-    private static final String CITY = "Samara";
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
     // Получить прогноз погоды на 3 дня каждые 3 часа
-    public ForecastResponse getForecastData() {
+    public ForecastResponse getForecastData(String city) {
         try {
-            String output = getUrlContent(buildForecastUrl());
+            String output = getUrlContent(buildForecastUrl(city));
             System.out.println(output);
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             ForecastResponse forecastResponse = objectMapper.readValue(output, ForecastResponse.class);
@@ -39,8 +38,8 @@ public class WeatherApiService {
     }
 
     // текущая погода
-    public WeatherResponse getWeatherData() {
-        String output = getUrlContent(buildWeatherUrl());
+    public WeatherResponse getWeatherData(String city) {
+        String output = getUrlContent(buildWeatherUrl(city));
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
             WeatherResponse weatherResponse = objectMapper.readValue(output, WeatherResponse.class);
@@ -63,12 +62,12 @@ public class WeatherApiService {
         }
     }
 
-    private String buildForecastUrl() {
-        return FORECAST_URL + CITY + "&appid=" + APP_ID + "&units=metric";
+    private String buildForecastUrl(String city) {
+        return FORECAST_URL + city + "&appid=" + APP_ID + "&units=metric";
     }
 
-    private String buildWeatherUrl() {
-        return WEATHER_URL + CITY + "&appid=" + APP_ID + "&units=metric";
+    private String buildWeatherUrl(String city) {
+        return WEATHER_URL + city + "&appid=" + APP_ID + "&units=metric";
     }
 
     private String buildLocationUrl(String city) {
@@ -93,7 +92,7 @@ public class WeatherApiService {
 
 
         } catch (Exception e) {
-            System.out.println("Город не найден");
+            log.error("City not found");
         }
         return content.toString();
     }

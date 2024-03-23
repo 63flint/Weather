@@ -2,10 +2,18 @@ package com.flint.Weather.service;
 
 import com.flint.Weather.model.api.entity.Day;
 import com.flint.Weather.model.ForecastResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+
+//@Service
+//@RequiredArgsConstructor
+@Slf4j
 public class ForecastService {
     private ForecastResponse forecastResponse;
 
@@ -27,7 +35,7 @@ public class ForecastService {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         ZoneId zoneId = ZoneId.of("Europe/Samara");
         ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(zoneId);
-        System.out.println(zdt);
+        log.info("Current time: " + zdt);
         return String.format("%02d", zdt.getHour());
     }
 
@@ -36,7 +44,7 @@ public class ForecastService {
     }
 
     public String isDay(){
-        long time = forecastResponse.getList().get(0).getDt();
+        long time = forecastResponse.getList().get(0).getDt() - 10800;
         return time > forecastResponse.getCity().getSunrise() && time < forecastResponse.getCity().getSunset() ? "day" : "night";
     }
 

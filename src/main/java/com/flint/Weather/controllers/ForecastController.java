@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
-//@RequestMapping("index")
+@RequestMapping("forecast")
 @RequiredArgsConstructor
 public class ForecastController {
     private final LocationService locationService;
@@ -24,14 +24,15 @@ public class ForecastController {
     private ForecastService forecastService;
     private WeatherService weatherService;
 
-//    @GetMapping("/{location_id}")
-    @GetMapping("/forecast")
-    public String loadForecastWeather(Model model)
+    @GetMapping("/{location_id}")
+//    @GetMapping("/forecast")
+    public String loadForecastWeather(@PathVariable int location_id, Model model)
     {
-//        Location location = locationService.getLocationById(location_id);
-//        log.info(location.getName());
-        forecastService = new ForecastService(weatherApiService.getForecastData());
-        weatherService = new WeatherService(weatherApiService.getWeatherData());
+        Location location = locationService.getLocationById(location_id);
+        log.info(location.getName());
+
+        forecastService = new ForecastService(weatherApiService.getForecastData(location.getName()));
+        weatherService = new WeatherService(weatherApiService.getWeatherData(location.getName()));
 
         // main
         model.addAttribute("city", forecastService.getCity());
