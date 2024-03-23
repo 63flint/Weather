@@ -1,23 +1,35 @@
 package com.flint.Weather.controllers;
 
 import com.flint.Weather.connectWeatherAPI.WeatherApiService;
+import com.flint.Weather.entity.Location;
 import com.flint.Weather.service.ForecastService;
 import com.flint.Weather.model.api.entity.Day;
+import com.flint.Weather.service.LocationService;
 import com.flint.Weather.service.WeatherService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@Slf4j
 @Controller
+//@RequestMapping("index")
+@RequiredArgsConstructor
 public class ForecastController {
+    private final LocationService locationService;
     private WeatherApiService weatherApiService = new WeatherApiService();
     private ForecastService forecastService;
     private WeatherService weatherService;
 
-    @GetMapping("/index")
-    public String home(Model model)
+//    @GetMapping("/{location_id}")
+    @GetMapping("/forecast")
+    public String loadForecastWeather(Model model)
     {
+//        Location location = locationService.getLocationById(location_id);
+//        log.info(location.getName());
         forecastService = new ForecastService(weatherApiService.getForecastData());
         weatherService = new WeatherService(weatherApiService.getWeatherData());
 
@@ -68,9 +80,6 @@ public class ForecastController {
         // Смена дня/ночи
         model.addAttribute("fgg", forecastService.isDay());
 
-        return "index";
+        return "forecast";
     }
-
-
-
 }

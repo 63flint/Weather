@@ -43,9 +43,11 @@ public class LocationService {
     public void savedLocation(List<LocationResponse> locationResponses, Long userId){
         for (LocationResponse location: locationResponses) {
             Optional<Location> locationDB = getLocationFromDb(location, userId);
+
             // Проверка, что такая локация уже записана в БД
             if(locationDB.isPresent()){
                 location.setId(locationDB.get().getId());
+                location.setSaved(true);
             }
         }
     }

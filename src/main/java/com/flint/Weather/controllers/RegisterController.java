@@ -25,7 +25,7 @@ public class RegisterController {
     public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("user", userDetails);
         log.info("redirect on index page");
-        return "locations";
+        return "index";
     }
 
     @GetMapping("/login")
@@ -56,7 +56,7 @@ public class RegisterController {
 
 
         request.login(userRegisterRequestDTO.getEmail(), userRegisterRequestDTO.getPassword());
-        return "redirect:/locations";
+        return "redirect:/";
     }
 
 

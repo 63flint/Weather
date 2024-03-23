@@ -18,4 +18,5 @@ public class LocationResponse {
     private Double longitude;
     private String country;
     private Integer id;
+    private boolean isSaved;
 }
