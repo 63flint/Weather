@@ -3,7 +3,7 @@ package com.flint.Weather.controllers;
 import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.service.ForecastService;
-import com.flint.Weather.model.api.entity.Day;
+import com.flint.Weather.dto.api.weather.Day;
 import com.flint.Weather.service.LocationService;
 import com.flint.Weather.service.WeatherService;
 import lombok.RequiredArgsConstructor;

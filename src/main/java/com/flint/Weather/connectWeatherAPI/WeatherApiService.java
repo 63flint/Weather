@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.flint.Weather.model.ForecastResponse;
-import com.flint.Weather.model.LocationResponse;
-import com.flint.Weather.model.WeatherResponse;
+import com.flint.Weather.dto.ForecastResponse;
+import com.flint.Weather.dto.LocationResponse;
+import com.flint.Weather.dto.WeatherResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

@@ -1,8 +1,8 @@
-package com.flint.Weather.model.api.entity;
+package com.flint.Weather.dto.api.weather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Snow {
+public class Rain {
     private double h;
 
     @JsonProperty("3h")

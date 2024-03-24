@@ -1,6 +1,6 @@
 package com.flint.Weather.repository;
 
-import com.flint.Weather.model.LocationResponse;
+import com.flint.Weather.dto.LocationResponse;
 import com.flint.Weather.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

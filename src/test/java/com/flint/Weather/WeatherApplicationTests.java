@@ -1,7 +1,7 @@
 package com.flint.Weather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flint.Weather.model.ForecastResponse;
+import com.flint.Weather.dto.ForecastResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

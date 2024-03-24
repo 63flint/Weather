@@ -1,9 +1,8 @@
 package com.flint.Weather.service;
 
-import com.flint.Weather.model.api.entity.Day;
-import com.flint.Weather.model.ForecastResponse;
+import com.flint.Weather.dto.api.weather.Day;
+import com.flint.Weather.dto.ForecastResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +10,15 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 
-//@Service
-//@RequiredArgsConstructor
+@Service
+@RequiredArgsConstructor
 @Slf4j
 public class ForecastService {
-    private ForecastResponse forecastResponse;
+    private final ForecastResponse forecastResponse;
 
-    public ForecastService(ForecastResponse forecastResponse){
-        this.forecastResponse = forecastResponse;
-    }
+//    public ForecastService(ForecastResponse forecastResponse){
+//        this.forecastResponse = forecastResponse;
+//    }
 
     public Day getDayWeather(int index){
         double now = System.currentTimeMillis();

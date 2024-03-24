@@ -1,4 +1,4 @@
-package com.flint.Weather.model.api.entity;
+package com.flint.Weather.dto.api.weather;
 
 public class Main {
     private double temp = 0.0;

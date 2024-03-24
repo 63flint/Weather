@@ -4,7 +4,7 @@ import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.entity.CustomUser;
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.entity.User;
-import com.flint.Weather.model.LocationResponse;
+import com.flint.Weather.dto.LocationResponse;
 import com.flint.Weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
