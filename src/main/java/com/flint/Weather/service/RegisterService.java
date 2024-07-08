@@ -16,8 +16,7 @@ import java.util.Arrays;
 @Service
 @RequiredArgsConstructor
 public class RegisterService {
-    public final UserRepository userRepository;
-
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 

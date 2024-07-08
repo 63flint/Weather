@@ -30,7 +30,7 @@ public class SearchController {
         locationService.savedLocation(locationResponses, user.getId());
         model.addAttribute("locations", locationResponses);
         model.addAttribute("newLocation", new Location());
-//        model.addAttribute("isSaved", locationService.checkLocationInDB(weatherApiService.getLocation(startString)));
+        model.addAttribute("user_name", user.getName());
         return "search";
     }
 

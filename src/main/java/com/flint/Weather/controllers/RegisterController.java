@@ -1,6 +1,8 @@
 package com.flint.Weather.controllers;
 
 import com.flint.Weather.dto.UserRegistration;
+import com.flint.Weather.entity.CustomUser;
+import com.flint.Weather.entity.User;
 import com.flint.Weather.service.RegisterService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +25,9 @@ public class RegisterController {
 
     @GetMapping("/")
     public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        User user = ((CustomUser) userDetails).getUser();
         model.addAttribute("user", userDetails);
+        model.addAttribute("user_name", user.getName());
         log.info("redirect on index page");
         return "index";
     }

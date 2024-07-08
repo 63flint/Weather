@@ -45,6 +45,7 @@ public class LocationController {
         User user = ((CustomUser) userDetails).getUser();
         List<Location> locations = locationService.getAllUserLocations(user);
         model.addAttribute("locations", locations);
+        model.addAttribute("user_name", user.getName());
         return "locations";
     }
 }

@@ -25,14 +25,14 @@ public class ForecastController {
     private WeatherService weatherService;
 
     @GetMapping("/{location_id}")
-//    @GetMapping("/forecast")
     public String loadForecastWeather(@PathVariable int location_id, Model model)
     {
         Location location = locationService.getLocationById(location_id);
-        log.info(location.getName());
+        String city = location.getName();
+        log.info(city);
 
-        forecastService = new ForecastService(weatherApiService.getForecastData(location.getName()));
-        weatherService = new WeatherService(weatherApiService.getWeatherData(location.getName()));
+        forecastService = new ForecastService(weatherApiService.getForecastData(city));
+        weatherService = new WeatherService(weatherApiService.getWeatherData(city));
 
         // main
         model.addAttribute("city", forecastService.getCity());
@@ -47,7 +47,6 @@ public class ForecastController {
         model.addAttribute("feels_like", today.getMain().getFeels_like());
         model.addAttribute("image1", forecastService.getIcon(0));
         model.addAttribute("description", today.getWeather().get(0).getDescription());
-        model.addAttribute("serverTime",  forecastService.getTime(today.getDt_txt()));
 
         //2
         Day offset_0h = forecastService.getDayWeather(0);
@@ -79,7 +78,7 @@ public class ForecastController {
         model.addAttribute("image6", forecastService.getIcon(4));
 
         // Смена дня/ночи
-        model.addAttribute("fgg", forecastService.isDay());
+        model.addAttribute("day_night", forecastService.isDay());
 
         return "forecast";
     }

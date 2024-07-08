@@ -74,7 +74,8 @@ public class LocationService {
     }
 
     private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Long userId){
-        return locationRepository.findByNameAndCountryAndUserId(locationResponse.getName(), locationResponse.getCountry(), userId);
+        return locationRepository.findByNameAndLatitudeAndLongitudeAndUserId(locationResponse.getName(), locationResponse.getLatitude(), locationResponse.getLongitude(), userId);
     }
+
 
 }
