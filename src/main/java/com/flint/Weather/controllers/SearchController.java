@@ -5,6 +5,7 @@ import com.flint.Weather.entity.CustomUser;
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.entity.User;
 import com.flint.Weather.dto.LocationResponse;
+import com.flint.Weather.service.AuthoritiesService;
 import com.flint.Weather.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,7 @@ import java.util.List;
 public class SearchController {
 
     private final LocationService locationService;
+    private final AuthoritiesService authoritiesService;
     private WeatherApiService weatherApiService = new WeatherApiService();
 
     @GetMapping

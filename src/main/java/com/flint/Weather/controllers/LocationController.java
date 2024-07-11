@@ -27,7 +27,7 @@ public class LocationController {
     @GetMapping("/{id}/delete")
     public String deleteLocation(@PathVariable("id") Integer locationId, @ModelAttribute("startString") String startString){
         locationService.deleteLocation(locationId);
-        return "redirect:/";
+        return "redirect:/location/saved";
     }
 
     @PostMapping("/save")

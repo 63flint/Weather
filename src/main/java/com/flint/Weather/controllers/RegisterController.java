@@ -25,9 +25,12 @@ public class RegisterController {
 
     @GetMapping("/")
     public String showHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        User user = ((CustomUser) userDetails).getUser();
+        // Если авторизация не пройдена userDetails = null
         model.addAttribute("user", userDetails);
-        model.addAttribute("user_name", user.getName());
+        if (userDetails != null) {
+            User user = ((CustomUser) userDetails).getUser();
+            model.addAttribute("user_name", user.getName());
+        }
         log.info("redirect on index page");
         return "index";
     }
@@ -57,7 +60,6 @@ public class RegisterController {
 
         log.info(userRegisterRequestDTO.getLastName());
         registerService.saveUser(userRegisterRequestDTO);
-
 
         request.login(userRegisterRequestDTO.getEmail(), userRegisterRequestDTO.getPassword());
         return "redirect:/";
