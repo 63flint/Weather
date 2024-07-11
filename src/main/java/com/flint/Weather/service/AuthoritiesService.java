@@ -4,6 +4,7 @@ import com.flint.Weather.entity.CustomUser;
 import com.flint.Weather.entity.Role;
 import com.flint.Weather.entity.User;
 import com.flint.Weather.repository.UserRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
