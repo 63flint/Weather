@@ -20,4 +20,7 @@ Web элементы используются с:
 Получение проогноза погоды каждые 3 часа:
 [https://openweathermap.org/forecast5](https://openweathermap.org/forecast5)
 
+Шаблонизатор:
+[https://www.thymeleaf.org/doc/tutorials](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
+
 ## Deploy
