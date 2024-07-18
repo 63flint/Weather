@@ -24,3 +24,8 @@ Web элементы используются с:
 [https://www.thymeleaf.org/doc/tutorials](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
 
 ## Deploy
+
+## Error message
+Ошибки сервиса отображаются ввиде модального окна
+
+![Error](/img/error.png)

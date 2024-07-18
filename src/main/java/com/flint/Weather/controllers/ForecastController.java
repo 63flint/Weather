@@ -40,7 +40,6 @@ public class ForecastController {
 
         // 1
         Day today = forecastService.getDayWeather(0);
-//        model.addAttribute("temp1", today.getMain().getTemp());
         model.addAttribute("temp1", weatherService.getCurrentTemp());
         model.addAttribute("pressure", today.getMain().getPressure());
         model.addAttribute("speed", today.getWind().getSpeed());

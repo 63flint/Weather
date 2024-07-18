@@ -20,9 +20,9 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public String exception(Exception exception, RedirectAttributes redirectAttributes, HandlerMethod handlerMethod){
-        String controllerName = handlerMethod.getBeanType().getName();
+        String className = handlerMethod.getBeanType().getSimpleName();
         String methodName = handlerMethod.getMethod().getName();
-        redirectAttributes.addFlashAttribute("error", new ErrorMessage("Controller: " + controllerName + " \nMessage: " + exception.getMessage()));
+        redirectAttributes.addFlashAttribute("error", new ErrorMessage("Class name: " + className + " \nMessage: " + exception.getMessage()));
         log.error(exception.getMessage());
         return "redirect:/location/saved";
     }

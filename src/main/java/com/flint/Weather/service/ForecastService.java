@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.zone.ZoneOffsetTransition;
 
 
 @Service
@@ -30,10 +31,18 @@ public class ForecastService {
         return forecastResponse.getCity().getName();
     }
 
+//    public String getTime(String time) {
+//        LocalDateTime localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+//        ZoneId zoneId = ZoneId.of(String.valueOf(forecastResponse.getCity().getTimezone()));
+//        ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(zoneId);
+//        log.info("Current time: " + zdt);
+//        return String.format("%02d", zdt.getHour());
+//    }
+
     public String getTime(String time) {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        ZoneId zoneId = ZoneId.of("Europe/Samara");
-        ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(zoneId);
+        ZoneOffset zoneOffset = ZoneOffset.ofTotalSeconds(forecastResponse.getCity().getTimezone());
+        ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.UTC).withZoneSameInstant(zoneOffset);
         log.info("Current time: " + zdt);
         return String.format("%02d", zdt.getHour());
     }
