@@ -5,11 +5,10 @@ import com.flint.Weather.dto.api.weather.Day;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-@Component
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

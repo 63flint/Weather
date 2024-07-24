@@ -1,6 +1,6 @@
 package com.flint.Weather.controllers;
 
-import com.flint.Weather.connectWeatherAPI.WeatherApiService;
+import com.flint.Weather.service.WeatherApiService;
 import com.flint.Weather.entity.CustomUser;
 import com.flint.Weather.entity.Location;
 import com.flint.Weather.entity.User;
@@ -23,7 +23,7 @@ public class SearchController {
 
     private final LocationService locationService;
     private final AuthoritiesService authoritiesService;
-    private WeatherApiService weatherApiService = new WeatherApiService();
+    private final WeatherApiService weatherApiService;
 
     @GetMapping
     public String search(@ModelAttribute("startString") String startString, Model model, @AuthenticationPrincipal UserDetails userDetails){

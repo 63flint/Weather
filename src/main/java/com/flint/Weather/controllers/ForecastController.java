@@ -1,8 +1,6 @@
 package com.flint.Weather.controllers;
 
-import com.flint.Weather.connectWeatherAPI.WeatherApiService;
 import com.flint.Weather.entity.Location;
-import com.flint.Weather.service.AuthoritiesService;
 import com.flint.Weather.service.ForecastService;
 import com.flint.Weather.dto.api.weather.Day;
 import com.flint.Weather.service.LocationService;
@@ -21,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class ForecastController {
     private final LocationService locationService;
-    private WeatherApiService weatherApiService = new WeatherApiService();
-    private ForecastService forecastService;
-    private WeatherService weatherService;
+    private final ForecastService forecastService;
+    private final WeatherService weatherService;
 
     @GetMapping("/{location_id}")
     public String loadForecastWeather(@PathVariable int location_id, Model model)
@@ -32,8 +29,8 @@ public class ForecastController {
         String city = location.getName();
         log.info(city);
 
-        forecastService = new ForecastService(weatherApiService.getForecastData(city));
-        weatherService = new WeatherService(weatherApiService.getWeatherData(city));
+        forecastService.search(city);
+        weatherService.search(city);
 
         // main
         model.addAttribute("city", forecastService.getCity());

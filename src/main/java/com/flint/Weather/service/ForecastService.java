@@ -8,22 +8,20 @@ import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.zone.ZoneOffsetTransition;
 
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ForecastService {
-    private final ForecastResponse forecastResponse;
+    private final WeatherApiService weatherApiService;
+    private ForecastResponse forecastResponse = new ForecastResponse();
 
-//    public ForecastService(ForecastResponse forecastResponse){
-//        this.forecastResponse = forecastResponse;
-//    }
+    public void search(String city){
+        forecastResponse = weatherApiService.getForecastData(city);
+    }
 
     public Day getDayWeather(int index){
-        double now = System.currentTimeMillis();
-
         return forecastResponse.getList().get(index);
     }
 

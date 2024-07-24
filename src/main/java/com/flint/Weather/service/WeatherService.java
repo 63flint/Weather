@@ -1,13 +1,20 @@
 package com.flint.Weather.service;
 
 import com.flint.Weather.dto.WeatherResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
+@Slf4j
 public class WeatherService {
+    private final WeatherApiService weatherApiService;
 
-    private WeatherResponse weatherResponse;
+    private WeatherResponse weatherResponse = new WeatherResponse();
 
-    public WeatherService(WeatherResponse weatherResponse) {
-        this.weatherResponse = weatherResponse;
+    public void search(String city){
+        weatherResponse = weatherApiService.getWeatherData(city);
     }
 
     public double getCurrentTemp(){

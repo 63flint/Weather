@@ -1,4 +1,4 @@
-package com.flint.Weather.connectWeatherAPI;
+package com.flint.Weather.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -7,25 +7,42 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.flint.Weather.dto.ForecastResponse;
 import com.flint.Weather.dto.LocationResponse;
 import com.flint.Weather.dto.WeatherResponse;
+import jakarta.annotation.PostConstruct;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.List;
 
 @Slf4j
+@Service
+@NoArgsConstructor
 public class WeatherApiService {
-    private static final String APP_ID = "827ab0f94bca74870eb83bc59999ed23";
-    private static final String FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
-    private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
-    private static final String GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct?q=";
+
+    @Value(value = "${api.key}")
+    private String APP_KEY;
+
+    @Value(value = "${api.forecast.url}")
+    private String FORECAST_URL;
+
+    @Value(value = "${api.weather.url}")
+    private String WEATHER_URL;
+
+    @Value(value = "${api.geo.url}")
+    private String GEOCODING_URL;
+
+    @Value(value = "${connection.timeout}")
+    private int TIME_OUT;
     private ObjectMapper objectMapper = new ObjectMapper();
-    private static final int TIME_OUT = 120000;
-    public WeatherApiService(){
+
+    @PostConstruct
+    public void init(){
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
@@ -67,17 +84,16 @@ public class WeatherApiService {
     }
 
     private String buildForecastUrl(String city) {
-        return FORECAST_URL + city.replace(" ", "%20") + "&appid=" + APP_ID + "&units=metric";
+        return FORECAST_URL + city.replace(" ", "%20") + "&appid=" + APP_KEY + "&units=metric";
     }
 
     private String buildWeatherUrl(String city) {
-        return WEATHER_URL + city.replace(" ", "%20") + "&appid=" + APP_ID + "&units=metric";
+        return WEATHER_URL + city.replace(" ", "%20") + "&appid=" + APP_KEY + "&units=metric";
     }
 
     private String buildLocationUrl(String city) {
-        return GEOCODING_URL + city.replace(" ", "%20") + "&limit=5&appid=" + APP_ID;
+        return GEOCODING_URL + city.replace(" ", "%20") + "&limit=5&appid=" + APP_KEY;
     }
-
 
     // Возвращает строку в формате JSON с данными о погоде.
     private String getUrlContent(String urlAddress) {
