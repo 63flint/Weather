@@ -21,7 +21,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest
+@SpringBootTest()
 public class UserRegistrationTest {
     private static final String IMAGE_VERSION = "postgres:16-alpine";
     @Autowired

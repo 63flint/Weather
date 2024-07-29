@@ -51,10 +51,21 @@ public class LocationService {
         }
     }
 
-    public void saveUserInLocation(Location location, User user){
-        location.setUser(user);
-        locationRepository.save(location);
-        log.info("Save location: " + location.getName());
+    public void saveLocation(LocationResponse location, User user){
+        Location locationBd = new Location();
+        locationBd.setId(location.getId());
+        locationBd.setName(location.getName());
+        locationBd.setCountry(location.getCountry());
+        locationBd.setLongitude(location.getLongitude());
+        locationBd.setLatitude(location.getLatitude());
+        locationBd.setUser(user);
+
+        if (getLocationFromDb(location, user.getId()).isEmpty()) {
+            locationRepository.save(locationBd);
+            log.info("Save location: " + location.getName());
+        } else {
+            log.info("Location " + location.getName() + " already exist");
+        }
     }
 
     public void deleteLocation(Integer id){

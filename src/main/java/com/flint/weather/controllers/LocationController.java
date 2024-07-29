@@ -1,5 +1,6 @@
 package com.flint.weather.controllers;
 
+import com.flint.weather.dto.LocationResponse;
 import com.flint.weather.entity.CustomUser;
 import com.flint.weather.entity.Location;
 import com.flint.weather.entity.User;
@@ -31,12 +32,9 @@ public class LocationController {
     }
 
     @PostMapping("/save")
-    public String saveLocation(@ModelAttribute("newLocation") Location location, @AuthenticationPrincipal UserDetails userDetails, @RequestParam("startString") String startString) {
-
+    public String saveLocation(@ModelAttribute("newLocation") LocationResponse location, @AuthenticationPrincipal UserDetails userDetails, @RequestParam("startString") String startString) {
         User user = ((CustomUser) userDetails).getUser();
-        log.info(user.getName());
-        locationService.saveUserInLocation(location, user);
-
+        locationService.saveLocation(location, user);
         return "redirect:/search?startString=" + startString;
     }
 
