@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 
 @SpringBootTest
-class WeatherApplicationTests {
+class WeatherApiTest {
 
 	@Test
 	void contextLoads() throws IOException {

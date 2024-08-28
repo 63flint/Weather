@@ -4,7 +4,6 @@ import com.flint.weather.entity.Location;
 import com.flint.weather.entity.Role;
 import com.flint.weather.entity.User;
 import com.flint.weather.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +21,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest()
-public class UserRegistrationTest {
+public class DataBaseTest {
     private static final String IMAGE_VERSION = "postgres:16-alpine";
     @Autowired
     private UserRepository userRepository;
@@ -73,9 +72,17 @@ public class UserRegistrationTest {
         userRepository.save(new User(1L, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
         Optional<User> user = userRepository.findByEmail("sam@mail.com");
         if(user.isPresent()){
-            System.out.println(user.get().getName());
             assertThat(user.get().getName()).isEqualTo("Sam Stone");
         }
+    }
+
+    @Test
+    public void addSameUser(){
+        userRepository.save(new User(1L, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
+    }
+
+    @Test
+    public void deleteUser(){
 
     }
 }
