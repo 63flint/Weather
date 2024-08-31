@@ -1,0 +1,14 @@
+<nav>
+    <ul class="pagination justify-content-center" th:if="${locations.getTotalPages() > 1}">
+        <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{/user(pageNumber=${currentPage - 1})}">Previews</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(0, locations.getTotalPages() - 1)}"
+            th:classappend="${currentPage == page ? 'active' : ''}">
+            <a class="page-link" th:href="@{/user(pageNumber=${page})}" th:text="${page + 1}"></a>
+        </li>
+        <li class="page-item" th:classappend="${currentPage == locations.getTotalPages() - 1 ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{/user(pageNumber=${currentPage + 1})}">Next</a>
+        </li>
+    </ul>
+</nav>

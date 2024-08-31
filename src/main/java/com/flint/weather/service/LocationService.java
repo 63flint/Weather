@@ -4,13 +4,18 @@ import com.flint.weather.entity.Location;
 import com.flint.weather.dto.LocationResponse;
 import com.flint.weather.entity.User;
 import com.flint.weather.repository.LocationRepository;
+import com.flint.weather.utils.Json;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -84,9 +89,14 @@ public class LocationService {
         return locationRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
+    public Page<LocationResponse> getAllUserLocations(User user, PageRequest pageRequest){
+        List<Location> locations = locationRepository.findPageableLocations(user.getId(), pageRequest).orElse(Collections.emptyList());
+        List<LocationResponse> ls = locations.stream().map(x->Json.parse(x, LocationResponse.class)).toList();
+        return new PageImpl<>(ls, pageRequest, pageRequest.getPageSize());
+    }
+
     private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Long userId){
         return locationRepository.findByNameAndLatitudeAndLongitudeAndUserId(locationResponse.getName(), locationResponse.getLatitude(), locationResponse.getLongitude(), userId);
     }
-
 
 }
