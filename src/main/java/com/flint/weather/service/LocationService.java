@@ -12,10 +12,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -44,7 +47,7 @@ public class LocationService {
         return location.isPresent();
     }
 
-    public void savedLocation(List<LocationResponse> locationResponses, Long userId){
+    public void savedLocation(List<LocationResponse> locationResponses, Integer userId){
         for (LocationResponse location: locationResponses) {
             Optional<Location> locationDB = getLocationFromDb(location, userId);
 
@@ -89,13 +92,16 @@ public class LocationService {
         return locationRepository.findAllByUser(user).orElse(Collections.emptyList());
     }
 
-    public Page<LocationResponse> getAllUserLocations(User user, PageRequest pageRequest){
-        List<Location> locations = locationRepository.findPageableLocations(user.getId(), pageRequest).orElse(Collections.emptyList());
-        List<LocationResponse> ls = locations.stream().map(x->Json.parse(x, LocationResponse.class)).toList();
-        return new PageImpl<>(ls, pageRequest, pageRequest.getPageSize());
+    public Page<LocationResponse> getAllUserLocations(User user, PageRequest pageRequest) {
+        Page<Location> locations = locationRepository.findAllByUserId(user.getId(), pageRequest);
+        List<LocationResponse> ls = locations.getContent().stream().map(location -> {
+            location.setUser(null);
+            return Json.parse(location, LocationResponse.class);
+        }).toList();
+        return new PageImpl<>(ls, pageRequest, locations.getTotalElements());
     }
 
-    private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Long userId){
+    private Optional<Location> getLocationFromDb(LocationResponse locationResponse, Integer userId){
         return locationRepository.findByNameAndLatitudeAndLongitudeAndUserId(locationResponse.getName(), locationResponse.getLatitude(), locationResponse.getLongitude(), userId);
     }
 

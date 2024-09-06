@@ -28,6 +28,7 @@ public class Location {
     @Column(name = "longitude")
     @JsonProperty("lon")
     private Double longitude;
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     private User user;
 }
