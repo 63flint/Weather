@@ -47,7 +47,7 @@ public class LocationController {
         List<Location> locations = locationService.getAllUserLocations(user);
 
 
-        final Integer MAX_PAGINATION_ELEMENTS = 3;
+        final Integer MAX_PAGINATION_ELEMENTS = 6;
         Page<LocationResponse> locationsWithPaginations = locationService.getAllUserLocations(user, PageRequest.of(pageNumber,MAX_PAGINATION_ELEMENTS));
 
         List<LocationResponse> ls = locationsWithPaginations.getContent();

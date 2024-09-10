@@ -14,13 +14,13 @@ public class ExceptionHandler {
 //        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(exception.getMessage()));
 //    }
 
-//    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
-//    public String exception(Exception exception, RedirectAttributes redirectAttributes, HandlerMethod handlerMethod){
-//        String className = handlerMethod.getBeanType().getSimpleName();
-//        String methodName = handlerMethod.getMethod().getName();
-//        redirectAttributes.addFlashAttribute("error", new ErrorMessage("Class name: " + className + " \nMessage: " + exception.getMessage()));
-//        log.error(exception.getMessage());
-//        return "redirect:/location/saved";
-//    }
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public String exception(Exception exception, RedirectAttributes redirectAttributes, HandlerMethod handlerMethod){
+        String className = handlerMethod.getBeanType().getSimpleName();
+        String methodName = handlerMethod.getMethod().getName();
+        redirectAttributes.addFlashAttribute("error", new ErrorMessage("Class name: " + className + " \nMessage: " + exception.getMessage()));
+        log.error(exception.getMessage());
+        return "redirect:/location/saved";
+    }
 
 }

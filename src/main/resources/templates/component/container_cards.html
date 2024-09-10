@@ -1,0 +1,28 @@
+<div th:fragment="container_cards" class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div th:each="location : ${locations}" class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 th:text="${location.getName()}" class="card-title"></h5>
+                <p>Country:
+                    <span th:text="${location.getCountry()}"></span>
+                </p>
+                <p>Longitude:
+                    <span th:text="${location.getLongitude()}"></span>
+                </p>
+                <p>Latitude:
+                    <span th:text="${location.getLatitude()}"></span>
+                </p>
+
+                <a th:href="@{/forecast/{id}(id=${location.getId()})}" type="button" class="btn btn-primary">View
+                    Forecast</a>
+                <br>
+                <br>
+                <a th:href="@{/location/{id}/delete(id=${location.getId()})}" type="button"
+                   class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
