@@ -4,7 +4,7 @@ import com.flint.weather.entity.Location;
 import com.flint.weather.dto.LocationResponse;
 import com.flint.weather.entity.User;
 import com.flint.weather.repository.LocationRepository;
-import com.flint.weather.utils.Json;
+import com.flint.weather.utils.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -12,13 +12,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -96,7 +92,7 @@ public class LocationService {
         Page<Location> locations = locationRepository.findAllByUserId(user.getId(), pageRequest);
         List<LocationResponse> ls = locations.getContent().stream().map(location -> {
             location.setUser(null);
-            return Json.parse(location, LocationResponse.class);
+            return JsonUtil.parse(location, LocationResponse.class);
         }).toList();
         return new PageImpl<>(ls, pageRequest, locations.getTotalElements());
     }
