@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5444/db
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+api:
+  key: ${API_KEY}
+  forecast.url: ${API_FORECAST}
+  weather.url: ${API_WEATHER}
+  geo.url: ${API_GEO}
+
+connection:
+  timeout: 60000

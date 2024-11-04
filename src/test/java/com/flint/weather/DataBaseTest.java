@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest()
+@SpringBootTest(classes = UserRepository.class)
 public class DataBaseTest {
     private static final String IMAGE_VERSION = "postgres:16-alpine";
     @Autowired
@@ -69,7 +69,7 @@ public class DataBaseTest {
     @Test
     @Transactional
     public void createUser(){
-        userRepository.save(new User(1L, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
+        userRepository.save(new User(1, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
         Optional<User> user = userRepository.findByEmail("sam@mail.com");
         if(user.isPresent()){
             assertThat(user.get().getName()).isEqualTo("Sam Stone");
@@ -78,7 +78,7 @@ public class DataBaseTest {
 
     @Test
     public void addSameUser(){
-        userRepository.save(new User(1L, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
+        userRepository.save(new User(1, "Sam Stone", "123", "sam@mail.com", new ArrayList<Role>(), new ArrayList<Location>()));
     }
 
     @Test

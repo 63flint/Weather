@@ -24,6 +24,10 @@ Web элементы используются с:
 [https://www.thymeleaf.org/doc/tutorials](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
 
 ## Deploy
+Для локального запуска выполнить:
+docker-compose up
+
+Добавить в Edit configuration/environment variables: path/.env
 
 ## Error message
 Ошибки сервиса отображаются ввиде модального окна
