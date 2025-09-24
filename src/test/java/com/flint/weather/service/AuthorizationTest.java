@@ -1,4 +1,4 @@
-package com.flint.weather;
+package com.flint.weather.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
